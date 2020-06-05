@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: token-test
+  namespace: token-test
+spec:
+  containers:
+  - name: token-test
+    image: marcdbl/token-test:modsdk
+    imagePullPolicy: Always
+    env:
+    - name: AWS_ROLE_ARN
+      value: "arn:aws:iam::125383867651:role/k8s-token-test.services.kube0-prod"
+    - name: AWS_WEB_IDENTITY_TOKEN_FILE
+      value: "/var/run/secrets/eks.amazonaws.com/serviceaccount/token"
+    - name: WAIT_TIME_IN_SECONDS
+      value: "120"
+    volumeMounts:
+    - mountPath: "/var/run/secrets/eks.amazonaws.com/serviceaccount/"
+      name: aws-token
+  volumes:
+  - name: aws-token
+    projected:
+      sources:
+      - serviceAccountToken:
+          audience: "sts.amazonaws.com"
+          expirationSeconds: 600 
+          path: token
