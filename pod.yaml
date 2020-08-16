@@ -2,15 +2,16 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: token-test
-  namespace: token-test
 spec:
+  serviceAccount: wordpress
+  serviceAccountName: wordpress
   containers:
   - name: token-test
-    image: marcdbl/token-test:modsdk
+    image: pmvk/aws-token-test:latest
     imagePullPolicy: Always
     env:
     - name: AWS_ROLE_ARN
-      value: "arn:aws:iam::125383867651:role/k8s-token-test.services.kube0-prod"
+      value: "arn:aws:iam::044559835262:role/wordpress-sa"
     - name: AWS_WEB_IDENTITY_TOKEN_FILE
       value: "/var/run/secrets/eks.amazonaws.com/serviceaccount/token"
     - name: WAIT_TIME_IN_SECONDS
