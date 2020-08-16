@@ -24,7 +24,7 @@ while (true) {
     $s3Client = new S3Client([
         //'profile' => 'default',
         'provider' => $provider,
-        'region' => 'us-west-2',
+        'region' => 'eu-west-1',
         'version' => '2006-03-01'
     ]);
     $date = date('Y-m-d H:i:s');
