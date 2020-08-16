@@ -32,9 +32,9 @@ while (true) {
     //Listing all S3 Bucket
    try {
         $buckets = $s3Client->listBuckets();
-        // foreach ($buckets['Buckets'] as $bucket) {
-        //    echo sprintf(' %s%s', $bucket['Name'], PHP_EOL);
-        // }
+        foreach ($buckets['Buckets'] as $bucket) {
+          echo sprintf(' %s%s', $bucket['Name'], PHP_EOL);
+        }
         echo "Found " . sizeof($buckets['Buckets']) . " buckets." . PHP_EOL;
     } catch (AwsException $e) {
         echo "Error listing buckets: {$e->getMessage()}" . PHP_EOL;

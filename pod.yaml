@@ -15,7 +15,7 @@ spec:
     - name: AWS_WEB_IDENTITY_TOKEN_FILE
       value: "/var/run/secrets/eks.amazonaws.com/serviceaccount/token"
     - name: WAIT_TIME_IN_SECONDS
-      value: "120"
+      value: "1200"
     volumeMounts:
     - mountPath: "/var/run/secrets/eks.amazonaws.com/serviceaccount/"
       name: aws-token
